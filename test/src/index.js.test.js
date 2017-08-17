@@ -35,6 +35,19 @@ require( '@jrapp/node-project-setup' ).testing.file( './test' )( ( index ) => ( 
 			] );
 		} )
 	.done()
+	.describe( 'refresh' )
+		.it( 'should refresh', ( assert, index, { waterfall } ) => {
+			let count = 0;
+			const cache = index( () => ++count ).build();
+			return waterfall( [
+				() => cache.get( 1 ),
+				() => cache.get( 1 ),
+				() => cache.refresh( 1 ),
+				() => cache.get( 1 ),
+				() => cache.clear()
+			] ).then( () => assert.equal( count, 2 ) );
+		} )
+	.done()
 	.describe( 'ttl' )
 		.it( 'should not get from cache if stale item', ( assert, index, { waterfall } ) => {
 			let count = 0;
