@@ -22,6 +22,5 @@
 	"devDependencies": {
 		"@jrapp/node-project-setup": "*"
 	},
-	"dependencies": {
-	}
+	"dependencies": {}
 }
